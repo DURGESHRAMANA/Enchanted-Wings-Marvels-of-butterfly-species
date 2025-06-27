@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Butterfly Identifier</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url("/static/images/butterfly2.jpg") no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            color: white;
+        }
+
+        .content {
+            margin-left: 8%;
+            margin-top: 60px;
+            max-width: 400px;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .custom-file-upload {
+            background-color: #ff69b4;
+            color: white;
+            padding: 8px 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            width: fit-content;
+            text-align: center;
+        }
+
+        .submit-btn {
+            background-color: #ff69b4;
+            color: white;
+            padding: 8px 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            width: fit-content;
+        }
+
+        .submit-btn:hover,
+        .custom-file-upload:hover {
+            background-color: #ff3e94;
+        }
+
+        #preview {
+            max-height: 200px;
+            max-width: 250px; /* Reduced width */
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            margin-top: 10px;
+            display: none;
+            object-fit: contain;
+        }
+
+        #filename {
+            color: black;
+            font-size: 16px;
+            margin-top: 8px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Discover the Butterfly</h1>
+        <form action="/predict" method="POST" enctype="multipart/form-data">
+            <label class="custom-file-upload">
+                Choose File
+                <input type="file" name="file" accept="image/*" onchange="previewImage(event)" required>
+            </label>
+            <img id="preview" src="#" alt="Selected Image Preview">
+            <div id="filename"></div>
+            <button class="submit-btn" type="submit">Predict</button>
+        </form>
+    </div>
+
+    <script>
+        function previewImage(event) {
+            const fileInput = event.target;
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            if (file) {
+                document.getElementById('filename').textContent = file.name;
+                document.getElementById('filename').style.display = 'block';
+            }
+
+            reader.onload = function () {
+                const output = document.getElementById('preview');
+                output.src = reader.result;
+                output.style.display = 'block';
+            };
+
+            reader.readAsDataURL(file);
+        }
+    </script>
+</body>
+</html>

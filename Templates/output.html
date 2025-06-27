@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Result</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url("/static/images/butterfly1.jpg") no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding-left: 60px;
+            color: black;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .image-box img {
+            max-height: 400px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .result {
+            font-size: 24px;
+        }
+
+        .result h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #111111; /* Darker black for heading */
+        }
+
+        .result p {
+            margin: 0;
+            font-size: 22px;
+            color: #444444; /* Lighter black for paragraph */
+        }
+
+        .back-link {
+            margin-top: 20px;
+            display: inline-block;
+            font-size: 18px;
+            color: #ffd1ec;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+            color: #ff9ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-box">
+            <img src="{{ url_for('static', filename='images/' + butterfly_image_filename) }}" alt="Butterfly Image">
+        </div>
+        <div class="result">
+            <h1>Prediction Result</h1>
+            <p>This butterfly is identified as <strong>{{ butterfly }}</strong>.</p>
+            <a href="/" class="back-link">← Try another image</a>
+        </div>
+    </div>
+</body>
+</html>
